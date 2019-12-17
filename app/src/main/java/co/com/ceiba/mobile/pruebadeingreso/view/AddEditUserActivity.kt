@@ -8,22 +8,24 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import co.com.ceiba.mobile.pruebadeingreso.R
-import kotlinx.android.synthetic.main.activity_add_edit_post.edit_text_description
-import kotlinx.android.synthetic.main.activity_add_edit_post.edit_text_title
-import kotlinx.android.synthetic.main.activity_add_edit_post.number_picker_priority
+import kotlinx.android.synthetic.main.activity_add_edit_user.edit_text_email
+import kotlinx.android.synthetic.main.activity_add_edit_user.edit_text_name
+import kotlinx.android.synthetic.main.activity_add_edit_user.edit_text_username
+import kotlinx.android.synthetic.main.activity_add_edit_user.number_picker_priority
 
-class AddEditPostActivity : AppCompatActivity() {
+class AddEditUserActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_ID = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_ID"
-        const val EXTRA_TITLE = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_TITLE"
-        const val EXTRA_DESCRIPTION = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_DESCRIPTION"
+        const val EXTRA_NAME = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_NAME"
+        const val EXTRA_USERNAME = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_USERNAME"
+        const val EXTRA_EMAIL = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_EMAIL"
         const val EXTRA_PRIORITY = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_PRIORITY"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_edit_post)
+        setContentView(R.layout.activity_add_edit_user)
 
         number_picker_priority.minValue = 1
         number_picker_priority.maxValue = 10
@@ -32,8 +34,9 @@ class AddEditPostActivity : AppCompatActivity() {
 
         if (intent.hasExtra(EXTRA_ID)) {
             title = "Edit Post"
-            edit_text_title.setText(intent.getStringExtra(EXTRA_TITLE))
-            edit_text_description.setText(intent.getStringExtra(EXTRA_DESCRIPTION))
+            edit_text_name.setText(intent.getStringExtra(EXTRA_NAME))
+            edit_text_username.setText(intent.getStringExtra(EXTRA_USERNAME))
+            edit_text_email.setText(intent.getStringExtra(EXTRA_EMAIL))
             number_picker_priority.value = intent.getIntExtra(EXTRA_PRIORITY, 1)
         } else {
             title = "Add Post"
@@ -59,14 +62,15 @@ class AddEditPostActivity : AppCompatActivity() {
     }
 
     private fun savePost() {
-        if (edit_text_title.text.toString().trim().isBlank() || edit_text_description.text.toString().trim().isBlank()) {
+        if (edit_text_name.text.toString().trim().isBlank() || edit_text_username.text.toString().trim().isBlank()) {
             Toast.makeText(this, "Can not insert empty post!", Toast.LENGTH_SHORT).show()
             return
         }
 
         val data = Intent().apply {
-            putExtra(EXTRA_TITLE, edit_text_title.text.toString())
-            putExtra(EXTRA_DESCRIPTION, edit_text_description.text.toString())
+            putExtra(EXTRA_NAME, edit_text_name.text.toString())
+            putExtra(EXTRA_USERNAME, edit_text_username.text.toString())
+            putExtra(EXTRA_EMAIL, "emaildeprueba@gmail.com")
             putExtra(EXTRA_PRIORITY, number_picker_priority.value)
             if (intent.getIntExtra(EXTRA_ID, -1) != -1) {
                 putExtra(EXTRA_ID, intent.getIntExtra(EXTRA_ID, -1))

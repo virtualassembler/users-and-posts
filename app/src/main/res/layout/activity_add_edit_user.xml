@@ -7,18 +7,25 @@
         android:padding="16dp">
 
     <EditText
-            android:id="@+id/edit_text_title"
+            android:id="@+id/edit_text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
+            android:hint="Name"
             android:inputType="text"/>
 
     <EditText
-            android:id="@+id/edit_text_description"
+            android:id="@+id/edit_text_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
             android:inputType="textMultiLine"/>
+
+    <EditText
+        android:id="@+id/edit_text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textMultiLine"/>
 
     <TextView
             android:layout_width="wrap_content"

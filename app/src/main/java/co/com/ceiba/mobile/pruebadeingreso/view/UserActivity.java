@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import co.com.ceiba.mobile.pruebadeingreso.R;
 
-public class PostActivity extends Activity {
+public class UserActivity extends Activity {
 
 
     @Override

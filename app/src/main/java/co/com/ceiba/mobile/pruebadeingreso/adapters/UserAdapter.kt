@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import co.com.ceiba.mobile.pruebadeingreso.R
-import co.com.ceiba.mobile.pruebadeingreso.data.Post
-import kotlinx.android.synthetic.main.post_item.view.text_view_description
-import kotlinx.android.synthetic.main.post_item.view.text_view_priority
-import kotlinx.android.synthetic.main.post_item.view.text_view_title
+import co.com.ceiba.mobile.pruebadeingreso.data.User
+import kotlinx.android.synthetic.main.user_item.view.text_view_username
+import kotlinx.android.synthetic.main.user_item.view.text_view_priority
+import kotlinx.android.synthetic.main.user_item.view.text_view_name
 
 
-class PostAdapter: ListAdapter<Post, PostAdapter.PostHolder>(DIFF_CALLBACK) {
+class UserAdapter: ListAdapter<User, UserAdapter.PostHolder>(DIFF_CALLBACK) {
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Post>() {
-            override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
-                return oldItem.title == newItem.title && oldItem.description == newItem.description
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem.name == newItem.name && oldItem.username == newItem.username
                         && oldItem.priority == newItem.priority
             }
         }
@@ -32,19 +32,19 @@ class PostAdapter: ListAdapter<Post, PostAdapter.PostHolder>(DIFF_CALLBACK) {
     private var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.post_item, parent, false)
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
         return PostHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: PostHolder, position: Int) {
-        val currentPost: Post = getItem(position)
+        val currentPost: User = getItem(position)
 
-        holder.textViewTitle.text = currentPost.title
+        holder.textViewTitle.text = currentPost.name
         holder.textViewPriority.text = currentPost.priority.toString()
-        holder.textViewDescription.text = currentPost.description
+        holder.textViewDescription.text = currentPost.username
     }
 
-    fun getPostAt(position: Int): Post {
+    fun getPostAt(position: Int): User {
         return getItem(position)
     }
 
@@ -58,13 +58,13 @@ class PostAdapter: ListAdapter<Post, PostAdapter.PostHolder>(DIFF_CALLBACK) {
             }
         }
 
-        var textViewTitle: TextView = itemView.text_view_title
+        var textViewTitle: TextView = itemView.text_view_name
         var textViewPriority: TextView = itemView.text_view_priority
-        var textViewDescription: TextView = itemView.text_view_description
+        var textViewDescription: TextView = itemView.text_view_username
     }
 
     interface OnItemClickListener {
-        fun onItemClick(post: Post)
+        fun onItemClick(post: User)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {

@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -28,7 +27,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 buildscript {
@@ -94,7 +92,7 @@ android {
     }
 }
 
-//TO DO delete it
+//Jet pack repositories url
 allprojects {
     repositories {
         google()

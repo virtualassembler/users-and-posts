@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.com.ceiba.mobile.pruebadeingreso.R
-import co.com.ceiba.mobile.pruebadeingreso.adapters.PostAdapter
-import co.com.ceiba.mobile.pruebadeingreso.data.Post
-import co.com.ceiba.mobile.pruebadeingreso.viewmodels.PostViewModel
+import co.com.ceiba.mobile.pruebadeingreso.adapters.UserAdapter
+import co.com.ceiba.mobile.pruebadeingreso.data.User
+import co.com.ceiba.mobile.pruebadeingreso.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.buttonAddPost
 import kotlinx.android.synthetic.main.activity_main.recycler_view
 
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         const val EDIT_POST_REQUEST = 2
     }
 
-    private lateinit var postViewModel: PostViewModel
+    private lateinit var postViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         buttonAddPost.setOnClickListener {
             startActivityForResult(
-                    Intent(this, AddEditPostActivity::class.java),
+                    Intent(this, AddEditUserActivity::class.java),
                     ADD_POST_REQUEST
             )
         }
@@ -42,13 +42,13 @@ class MainActivity : AppCompatActivity() {
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
 
-        var adapter = PostAdapter()
+        var adapter = UserAdapter()
 
         recycler_view.adapter = adapter
 
-        postViewModel = ViewModelProviders.of(this).get(PostViewModel::class.java)
+        postViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
-        postViewModel.getAllPosts().observe(this, Observer<List<Post>> {
+        postViewModel.getAllPosts().observe(this, Observer<List<User>> {
             adapter.submitList(it)
         })
 
@@ -68,13 +68,14 @@ class MainActivity : AppCompatActivity() {
         }
         ).attachToRecyclerView(recycler_view)
 
-        adapter.setOnItemClickListener(object : PostAdapter.OnItemClickListener {
-            override fun onItemClick(post: Post) {
-                var intent = Intent(baseContext, AddEditPostActivity::class.java)
-                intent.putExtra(AddEditPostActivity.EXTRA_ID, post.id)
-                intent.putExtra(AddEditPostActivity.EXTRA_TITLE, post.title)
-                intent.putExtra(AddEditPostActivity.EXTRA_DESCRIPTION, post.description)
-                intent.putExtra(AddEditPostActivity.EXTRA_PRIORITY, post.priority)
+        adapter.setOnItemClickListener(object : UserAdapter.OnItemClickListener {
+            override fun onItemClick(post: User) {
+                var intent = Intent(baseContext, AddEditUserActivity::class.java)
+                intent.putExtra(AddEditUserActivity.EXTRA_ID, post.id)
+                intent.putExtra(AddEditUserActivity.EXTRA_NAME, post.name)
+                intent.putExtra(AddEditUserActivity.EXTRA_USERNAME, post.username)
+                intent.putExtra(AddEditUserActivity.EXTRA_EMAIL, post.email)
+                intent.putExtra(AddEditUserActivity.EXTRA_PRIORITY, post.priority)
 
                 startActivityForResult(intent, EDIT_POST_REQUEST)
             }
@@ -103,33 +104,33 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == ADD_POST_REQUEST && resultCode == Activity.RESULT_OK) {
-            val newPost = Post(
-                    data!!.getStringExtra(AddEditPostActivity.EXTRA_TITLE),
-                    data.getStringExtra(AddEditPostActivity.EXTRA_DESCRIPTION),
-                    data.getIntExtra(AddEditPostActivity.EXTRA_PRIORITY, 1)
+            val newPost = User(
+                    data!!.getStringExtra(AddEditUserActivity.EXTRA_NAME),
+                    data.getStringExtra(AddEditUserActivity.EXTRA_USERNAME),
+                    data.getStringExtra(AddEditUserActivity.EXTRA_EMAIL),
+                    data.getIntExtra(AddEditUserActivity.EXTRA_PRIORITY, 1)
             )
             postViewModel.insert(newPost)
 
             Toast.makeText(this, "Post saved!", Toast.LENGTH_SHORT).show()
         } else if (requestCode == EDIT_POST_REQUEST && resultCode == Activity.RESULT_OK) {
-            val id = data?.getIntExtra(AddEditPostActivity.EXTRA_ID, -1)
+            val id = data?.getIntExtra(AddEditUserActivity.EXTRA_ID, -1)
 
             if (id == -1) {
                 Toast.makeText(this, "Could not update! Error!", Toast.LENGTH_SHORT).show()
             }
 
-            val updatePost = Post(
-                    data!!.getStringExtra(AddEditPostActivity.EXTRA_TITLE),
-                    data.getStringExtra(AddEditPostActivity.EXTRA_DESCRIPTION),
-                    data.getIntExtra(AddEditPostActivity.EXTRA_PRIORITY, 1)
+            val updatePost = User(
+                    data!!.getStringExtra(AddEditUserActivity.EXTRA_NAME),
+                    data.getStringExtra(AddEditUserActivity.EXTRA_USERNAME),
+                    data.getStringExtra(AddEditUserActivity.EXTRA_EMAIL),
+                    data.getIntExtra(AddEditUserActivity.EXTRA_PRIORITY, 1)
             )
-            updatePost.id = data.getIntExtra(AddEditPostActivity.EXTRA_ID, -1)
+            updatePost.id = data.getIntExtra(AddEditUserActivity.EXTRA_ID, -1)
             postViewModel.update(updatePost)
 
         } else {
             Toast.makeText(this, "Post not saved!", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 }

@@ -4,16 +4,17 @@ import androidx.room.Entity
 
 
 @Entity(tableName = "post_table")
-data class Post(
+data class User(
 
-        var title: String,
+        var name: String,
 
-        var description: String,
+        var username: String,
+
+        var email: String,
 
         var priority: Int
 ) {
 
-    //does it matter if these are private or not?
     @androidx.room.PrimaryKey(autoGenerate = true)
     var id: Int = 0
 

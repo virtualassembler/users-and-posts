@@ -8,20 +8,20 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 
-@Database(entities = [Post::class], version = 1)
-abstract class PostDatabase : RoomDatabase() {
-    abstract fun postDao(): PostDao
+@Database(entities = [User::class], version = 2)
+abstract class UserDatabase : RoomDatabase() {
+    abstract fun postDao(): UserDao
 
 
     companion object {
-        private var instance: PostDatabase? = null
+        private var instance: UserDatabase? = null
 
-        fun getInstance(context: Context): PostDatabase? {
+        fun getInstance(context: Context): UserDatabase? {
             if (instance == null) {
-                synchronized(PostDatabase::class) {
+                synchronized(UserDatabase::class) {
                     instance = Room.databaseBuilder(
                             context.applicationContext,
-                            PostDatabase::class.java, "post_database"
+                            UserDatabase::class.java, "post_database"
                     )
                             .fallbackToDestructiveMigration() // when version increments, it migrates (deletes db and creates new) - else it crashes
                             .addCallback(roomCallback)
@@ -44,13 +44,13 @@ abstract class PostDatabase : RoomDatabase() {
         }
     }
 
-    class PopulateDbAsyncTask(db: PostDatabase?) : AsyncTask<Unit, Unit, Unit>() {
+    class PopulateDbAsyncTask(db: UserDatabase?) : AsyncTask<Unit, Unit, Unit>() {
         private val postDao = db?.postDao()
 
         override fun doInBackground(vararg p0: Unit?) {
-            postDao?.insert(Post("title 1", "description 1", 1))
-            postDao?.insert(Post("title 2", "description 2", 2))
-            postDao?.insert(Post("title 3", "description 3", 3))
+            postDao?.insert(User("David", "DavidLab44","david@gmail.com", 1))
+            postDao?.insert(User("Camilo", "Milo","camilo@gmail.com", 2))
+            postDao?.insert(User("Jaiber", "JJYepes","jaiber@gmail.com", 3))
         }
     }
 
