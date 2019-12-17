@@ -8,25 +8,25 @@ import co.com.ceiba.mobile.pruebadeingreso.data.UserRepository
 
 class UserViewModel (application: Application) : AndroidViewModel(application) {
     private var repository: UserRepository = UserRepository(application)
-    private var allPosts: LiveData<List<User>> = repository.getAllPosts()
+    private var allUsers: LiveData<List<User>> = repository.getAllUsers()
 
-    fun insert(post: User) {
-        repository.insert(post)
+    fun insert(user: User) {
+        repository.insert(user)
     }
 
-    fun update(post: User) {
-        repository.update(post)
+    fun update(user: User) {
+        repository.update(user)
     }
 
-    fun delete(post: User) {
-        repository.delete(post)
+    fun delete(user: User) {
+        repository.delete(user)
     }
 
-    fun deleteAllPosts() {
-        repository.deleteAllPosts()
+    fun deleteAllUsers() {
+        repository.deleteAllUsers()
     }
 
-    fun getAllPosts(): LiveData<List<User>> {
-        return allPosts
+    fun getAllUsers(): LiveData<List<User>> {
+        return allUsers
     }
 }

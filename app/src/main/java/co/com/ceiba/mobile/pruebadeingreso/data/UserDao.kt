@@ -11,17 +11,17 @@ import androidx.room.Update
 @Dao
 interface UserDao {
     @Insert
-    fun insert(post: User)
+    fun insert(user: User)
 
     @Update
-    fun update(post: User)
+    fun update(user: User)
 
     @Delete
-    fun delete(post: User)
+    fun delete(user: User)
 
-    @Query("DELETE FROM post_table")
-    fun deleteAllPosts()
+    @Query("DELETE FROM user_table")
+    fun deleteAllUsers()
 
-    @Query("SELECT * FROM post_table ORDER BY priority DESC")
-    fun getAllPosts(): LiveData<List<User>>
+    @Query("SELECT * FROM user_table ORDER BY priority DESC")
+    fun getAllUsers(): LiveData<List<User>>
 }

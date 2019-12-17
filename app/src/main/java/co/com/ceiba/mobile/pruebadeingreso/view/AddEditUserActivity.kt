@@ -33,27 +33,27 @@ class AddEditUserActivity : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
 
         if (intent.hasExtra(EXTRA_ID)) {
-            title = "Edit Post"
+            title = "Edit User"
             edit_text_name.setText(intent.getStringExtra(EXTRA_NAME))
             edit_text_username.setText(intent.getStringExtra(EXTRA_USERNAME))
             edit_text_email.setText(intent.getStringExtra(EXTRA_EMAIL))
             number_picker_priority.value = intent.getIntExtra(EXTRA_PRIORITY, 1)
         } else {
-            title = "Add Post"
+            title = "Add User"
         }
     }
 
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.add_post_menu, menu)
+        menuInflater.inflate(R.menu.add_user_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.save_post -> {
-                savePost()
+            R.id.save_user -> {
+                saveUser()
                 true
             }
 
@@ -61,9 +61,9 @@ class AddEditUserActivity : AppCompatActivity() {
         }
     }
 
-    private fun savePost() {
+    private fun saveUser() {
         if (edit_text_name.text.toString().trim().isBlank() || edit_text_username.text.toString().trim().isBlank()) {
-            Toast.makeText(this, "Can not insert empty post!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Can not insert empty user!", Toast.LENGTH_SHORT).show()
             return
         }
 

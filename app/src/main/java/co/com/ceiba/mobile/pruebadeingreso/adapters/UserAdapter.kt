@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.user_item.view.text_view_priority
 import kotlinx.android.synthetic.main.user_item.view.text_view_name
 
 
-class UserAdapter: ListAdapter<User, UserAdapter.PostHolder>(DIFF_CALLBACK) {
+class UserAdapter: ListAdapter<User, UserAdapter.UserHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
@@ -31,24 +31,24 @@ class UserAdapter: ListAdapter<User, UserAdapter.PostHolder>(DIFF_CALLBACK) {
 
     private var listener: OnItemClickListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
         val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
-        return PostHolder(itemView)
+        return UserHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: PostHolder, position: Int) {
-        val currentPost: User = getItem(position)
+    override fun onBindViewHolder(holder: UserHolder, position: Int) {
+        val currentUser: User = getItem(position)
 
-        holder.textViewTitle.text = currentPost.name
-        holder.textViewPriority.text = currentPost.priority.toString()
-        holder.textViewDescription.text = currentPost.username
+        holder.textViewTitle.text = currentUser.name
+        holder.textViewPriority.text = currentUser.priority.toString()
+        holder.textViewDescription.text = currentUser.username
     }
 
-    fun getPostAt(position: Int): User {
+    fun getUserAt(position: Int): User {
         return getItem(position)
     }
 
-    inner class PostHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UserHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
                 val position = adapterPosition
@@ -64,7 +64,7 @@ class UserAdapter: ListAdapter<User, UserAdapter.PostHolder>(DIFF_CALLBACK) {
     }
 
     interface OnItemClickListener {
-        fun onItemClick(post: User)
+        fun onItemClick(user: User)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {

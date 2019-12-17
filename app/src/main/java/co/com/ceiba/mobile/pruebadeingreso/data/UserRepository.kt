@@ -5,70 +5,70 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 
 class UserRepository(application: Application) {
-    private var postDao: UserDao
+    private var userDao: UserDao
 
-    private var allPosts: LiveData<List<User>>
+    private var allUsers: LiveData<List<User>>
 
     init {
         val database: UserDatabase = UserDatabase.getInstance(
                 application.applicationContext
         )!!
-        postDao = database.postDao()
-        allPosts = postDao.getAllPosts()
+        userDao = database.userDao()
+        allUsers = userDao.getAllUsers()
     }
 
-    fun insert(post: User) {
-        val insertPostAsyncTask = InsertPostAsyncTask(postDao).execute(post)
+    fun insert(user: User) {
+        val insertUserAsyncTask = InsertUserAsyncTask(userDao).execute(user)
     }
 
-    fun update(post: User) {
-        val updatePostAsyncTask = UpdatePostAsyncTask(postDao).execute(post)
+    fun update(user: User) {
+        val updateUserAsyncTask = UpdateUserAsyncTask(userDao).execute(user)
     }
 
-    fun delete(post: User) {
-        val deletePostAsyncTask = DeletePostAsyncTask(postDao).execute(post)
+    fun delete(user: User) {
+        val deleteUserAsyncTask = DeleteUserAsyncTask(userDao).execute(user)
     }
 
-    fun deleteAllPosts() {
-        val deleteAllPostsAsyncTask = DeleteAllPostsAsyncTask(
-                postDao
+    fun deleteAllUsers() {
+        val deleteAllUsersAsyncTask = DeleteAllUsersAsyncTask(
+                userDao
         ).execute()
     }
 
-    fun getAllPosts(): LiveData<List<User>> {
-        return allPosts
+    fun getAllUsers(): LiveData<List<User>> {
+        return allUsers
     }
 
     companion object {
-        private class InsertPostAsyncTask(postDao: UserDao) : AsyncTask<User, Unit, Unit>() {
-            val postDao = postDao
+        private class InsertUserAsyncTask(userDao: UserDao) : AsyncTask<User, Unit, Unit>() {
+            val userDao = userDao
 
             override fun doInBackground(vararg p0: User?) {
-                postDao.insert(p0[0]!!)
+                userDao.insert(p0[0]!!)
             }
         }
 
-        private class UpdatePostAsyncTask(postDao: UserDao) : AsyncTask<User, Unit, Unit>() {
-            val postDao = postDao
+        private class UpdateUserAsyncTask(userDao: UserDao) : AsyncTask<User, Unit, Unit>() {
+            val userDao = userDao
 
             override fun doInBackground(vararg p0: User?) {
-                postDao.update(p0[0]!!)
+                userDao.update(p0[0]!!)
             }
         }
 
-        private class DeletePostAsyncTask(postDao: UserDao) : AsyncTask<User, Unit, Unit>() {
-            val postDao = postDao
+        private class DeleteUserAsyncTask(userDao: UserDao) : AsyncTask<User, Unit, Unit>() {
+            val userDao = userDao
 
             override fun doInBackground(vararg p0: User?) {
-                postDao.delete(p0[0]!!)
+                userDao.delete(p0[0]!!)
             }
         }
 
-        private class DeleteAllPostsAsyncTask(postDao: UserDao) : AsyncTask<Unit, Unit, Unit>() {
-            val postDao = postDao
+        private class DeleteAllUsersAsyncTask(userDao: UserDao) : AsyncTask<Unit, Unit, Unit>() {
+            val userDao = userDao
 
             override fun doInBackground(vararg p0: Unit?) {
-                postDao.deleteAllPosts()
+                userDao.deleteAllUsers()
             }
         }
     }

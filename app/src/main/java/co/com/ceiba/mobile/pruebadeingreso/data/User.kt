@@ -3,7 +3,7 @@ package co.com.ceiba.mobile.pruebadeingreso.data
 import androidx.room.Entity
 
 
-@Entity(tableName = "post_table")
+@Entity(tableName = "user_table")
 data class User(
 
         var name: String,
