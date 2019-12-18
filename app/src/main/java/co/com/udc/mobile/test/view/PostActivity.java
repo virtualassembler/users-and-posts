@@ -1,9 +1,9 @@
-package co.com.ceiba.mobile.pruebadeingreso.view;
+package co.com.udc.mobile.test.view;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import co.com.ceiba.mobile.pruebadeingreso.R;
+import co.com.udc.mobile.test.R;
 
 public class PostActivity extends Activity {
 

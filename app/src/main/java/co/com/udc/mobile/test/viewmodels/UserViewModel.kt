@@ -1,10 +1,10 @@
-package co.com.ceiba.mobile.pruebadeingreso.viewmodels
+package co.com.udc.mobile.test.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import co.com.ceiba.mobile.pruebadeingreso.data.User
-import co.com.ceiba.mobile.pruebadeingreso.data.UserRepository
+import co.com.udc.mobile.test.data.User
+import co.com.udc.mobile.test.data.UserRepository
 
 class UserViewModel (application: Application) : AndroidViewModel(application) {
     private var repository: UserRepository = UserRepository(application)

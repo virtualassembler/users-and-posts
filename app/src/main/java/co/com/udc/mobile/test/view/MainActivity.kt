@@ -1,4 +1,4 @@
-package co.com.ceiba.mobile.pruebadeingreso.view
+package co.com.udc.mobile.test.view
 
 import android.app.Activity
 import android.content.Intent
@@ -12,10 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.com.ceiba.mobile.pruebadeingreso.R
-import co.com.ceiba.mobile.pruebadeingreso.adapters.UserAdapter
-import co.com.ceiba.mobile.pruebadeingreso.data.User
-import co.com.ceiba.mobile.pruebadeingreso.viewmodels.UserViewModel
+import co.com.udc.mobile.test.R
+import co.com.udc.mobile.test.adapters.UserAdapter
+import co.com.udc.mobile.test.data.User
+import co.com.udc.mobile.test.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.buttonAddUser
 import kotlinx.android.synthetic.main.activity_main.recycler_view
 

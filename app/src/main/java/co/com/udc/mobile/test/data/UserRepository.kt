@@ -1,4 +1,4 @@
-package co.com.ceiba.mobile.pruebadeingreso.data
+package co.com.udc.mobile.test.data
 
 import android.app.Application
 import android.os.AsyncTask

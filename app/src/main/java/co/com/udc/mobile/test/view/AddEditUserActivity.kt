@@ -1,4 +1,4 @@
-package co.com.ceiba.mobile.pruebadeingreso.view
+package co.com.udc.mobile.test.view
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import co.com.ceiba.mobile.pruebadeingreso.R
+import co.com.udc.mobile.test.R
 import kotlinx.android.synthetic.main.activity_add_edit_user.edit_text_email
 import kotlinx.android.synthetic.main.activity_add_edit_user.edit_text_name
 import kotlinx.android.synthetic.main.activity_add_edit_user.edit_text_username

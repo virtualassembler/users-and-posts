@@ -1,4 +1,4 @@
-package co.com.ceiba.mobile.pruebadeingreso.adapters
+package co.com.udc.mobile.test.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import co.com.ceiba.mobile.pruebadeingreso.R
-import co.com.ceiba.mobile.pruebadeingreso.data.User
+import co.com.udc.mobile.test.R
+import co.com.udc.mobile.test.data.User
 import kotlinx.android.synthetic.main.user_item.view.text_view_username
 import kotlinx.android.synthetic.main.user_item.view.text_view_priority
 import kotlinx.android.synthetic.main.user_item.view.text_view_name
