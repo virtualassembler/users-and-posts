@@ -25,6 +25,9 @@ interface UserDao {
     @Query("SELECT * FROM user_table ORDER BY phone DESC")
     fun getAllUsers(): LiveData<List<User>>
 
+    @Query("SELECT * FROM user_table WHERE name LIKE :name")
+    fun getFilteredUsers(name: String): List<User>
+
     @Query("SELECT * FROM user_table ORDER BY phone DESC")
     fun getUsers(): List<User>
 }

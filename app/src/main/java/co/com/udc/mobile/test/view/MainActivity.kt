@@ -18,7 +18,9 @@ import co.com.udc.mobile.test.data.User
 import co.com.udc.mobile.test.data.UserRepository
 import co.com.udc.mobile.test.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.buttonAddUser
+import kotlinx.android.synthetic.main.activity_main.goButton
 import kotlinx.android.synthetic.main.activity_main.recycler_view
+import kotlinx.android.synthetic.main.activity_main.searchInput
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var userViewModel: UserViewModel
+    private lateinit var userAdapter: UserAdapter
+    private lateinit var userRepository: UserRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,10 @@ class MainActivity : AppCompatActivity() {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
         userViewModel.getAllUsers().observe(this, Observer<List<User>> {
+            adapter.submitList(it)
+        })
+
+        userViewModel.getFilteredUsers().observe(this, Observer<List<User>> {
             adapter.submitList(it)
         })
 
@@ -82,15 +90,20 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, EDIT_POST_REQUEST)
             }
         })
-    }
 
-    private lateinit var userAdapter: UserAdapter
-    private lateinit var userRepository: UserRepository
+        goButton.setOnClickListener {
+            val result = searchInput.text.toString()
+            if (result.isNotEmpty())
+                userViewModel.filterByName(result)
+            else userViewModel.getAllUsers()
+        }
+    }
 
     private fun initComponents() {
         userAdapter = UserAdapter()
         userRepository = UserRepository(application)
         userRepository.requestMovieReviewList()
+        //esto muere aqui
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

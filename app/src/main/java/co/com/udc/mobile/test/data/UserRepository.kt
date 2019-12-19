@@ -1,7 +1,6 @@
 package co.com.udc.mobile.test.data
 
 import android.app.Application
-import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -14,11 +13,9 @@ import retrofit2.Response
 class UserRepository(private val application: Application) {
 
 
-
-
     private var userDao: UserDao
-
     private var allUsers: LiveData<List<User>>
+  //  private var filteredUsers: LiveData<List<User>>
 
     init {
         val database: UserDatabase = UserDatabase.getInstance(
@@ -26,6 +23,7 @@ class UserRepository(private val application: Application) {
         )!!
         userDao = database.userDao()
         allUsers = userDao.getAllUsers()
+      //  filteredUsers = userDao.getFilteredUsers()
     }
 
     private val apiService = ApiService.instance
@@ -52,7 +50,7 @@ class UserRepository(private val application: Application) {
     private fun insertUsersIntoDatabase(response: Response<List<User>>) {
         if (response.body() != null) {
             for (user: User in response.body() as List<User>) {
-                Log.e("user","info: "+user.toString())
+                Log.e("user", "info: " + user.toString())
                 movieDatabase.insert(user)
             }
         }
@@ -82,6 +80,10 @@ class UserRepository(private val application: Application) {
 
     fun getAllUsers(): LiveData<List<User>> {
         return allUsers
+    }
+
+    fun getFilteredUsers(userName: String): List<User> {
+        return userDao.getFilteredUsers("%$userName%")
     }
 
     companion object {
@@ -117,8 +119,5 @@ class UserRepository(private val application: Application) {
             }
         }
     }
-
-
-
 
 }

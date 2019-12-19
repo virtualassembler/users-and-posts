@@ -5,7 +5,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".view.MainActivity">
 
 
     <LinearLayout
@@ -26,6 +26,11 @@
             android:drawablePadding="8dp"
             android:hint="Search"
             android:textColor="@color/cardview_dark_background" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/goButton"
+            android:text="go"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
