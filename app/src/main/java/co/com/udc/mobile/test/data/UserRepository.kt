@@ -1,10 +1,54 @@
 package co.com.udc.mobile.test.data
 
 import android.app.Application
+import android.content.Context
 import android.os.AsyncTask
+import android.util.Log
 import androidx.lifecycle.LiveData
+import co.com.udc.mobile.test.R
+import co.com.udc.mobile.test.api.ApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class UserRepository(application: Application) {
+class UserRepository(application: Application,val context: Context) {
+
+
+    private val apiService = ApiService.instance
+    private val movieDatabase: UserDao get() = UserDatabase.getInstance(context)!!.userDao()
+
+    //To look in the endpoint for userList
+    fun requestMovieReviewList(): List<User> {
+        apiService.getMovieReviewListFromInternet().enqueue(object : Callback<List<User>> {
+            override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
+                when (response.code()) {
+                    200 -> insertUsersIntoDatabase(response)
+                    else -> Log.e(context.getString(R.string.error_tag), context.getString(R.string.error_response_code_different_to_200))
+                }
+            }
+
+            override fun onFailure(call: Call<List<User>>, t: Throwable) {
+                Log.e(context.getString(R.string.error_tag), t.printStackTrace().toString())
+            }
+        })
+        return getUserList()
+    }
+
+    //Save users in local DB
+    private fun insertUsersIntoDatabase(response: Response<List<User>>) {
+        if (response.body() != null) {
+            for (user: User in response.body() as List<User>) {
+                Log.e("user","info: "+user.toString())
+                movieDatabase.insert(user)
+            }
+        }
+    }
+
+    fun getUserList(): List<User> {
+        return UserDatabase.getInstance(context)!!.userDao().getUsers()
+    }
+
+
     private var userDao: UserDao
 
     private var allUsers: LiveData<List<User>>

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.com.udc.mobile.test.R
 import co.com.udc.mobile.test.adapters.UserAdapter
 import co.com.udc.mobile.test.data.User
-import co.com.udc.mobile.test.repository.MovieRepository
+import co.com.udc.mobile.test.data.UserRepository
 import co.com.udc.mobile.test.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.buttonAddUser
 import kotlinx.android.synthetic.main.activity_main.recycler_view
@@ -84,16 +84,14 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
     private lateinit var userAdapter: UserAdapter
-    private lateinit var movieRepository: MovieRepository
+    private lateinit var userRepository: UserRepository
 
     private fun initComponents() {
         userAdapter = UserAdapter()
-        movieRepository = MovieRepository(application)
-        movieRepository.requestMovieReviewList()
+        userRepository = UserRepository(application,applicationContext)
+        userRepository.requestMovieReviewList()
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
