@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_post.view.email
 
 class PostActivity : AppCompatActivity() {
 
-
     companion object {
         const val EXTRA_ID = "co.com.udc.mobile.test.view.EXTRA_ID"
         const val EXTRA_NAME = "co.com.udc.mobile.test.view.EXTRA_NAME"

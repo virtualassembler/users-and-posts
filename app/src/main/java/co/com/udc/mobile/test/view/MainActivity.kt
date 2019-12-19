@@ -24,10 +24,12 @@ import kotlinx.android.synthetic.main.activity_main.searchInput
 
 
 class MainActivity : AppCompatActivity() {
+    /*
     companion object {
         const val ADD_POST_REQUEST = 1
         const val EDIT_POST_REQUEST = 2
     }
+    */
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var userAdapter: UserAdapter
@@ -137,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -170,4 +173,5 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "User not saved!", Toast.LENGTH_SHORT).show()
         }
     }
+    */
 }
