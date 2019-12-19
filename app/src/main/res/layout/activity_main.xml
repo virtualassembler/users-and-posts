@@ -7,12 +7,46 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/search_input_style"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:drawablePadding="8dp"
+            android:hint="Search"
+            android:textColor="@color/cardview_dark_background" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            tools:listitem="@layout/user_item"
+            tools:itemCount="5"/>
+
+    </LinearLayout>
+
+    <!--
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/user_item"
             tools:itemCount="5"/>
+    -->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/buttonAddUser"
