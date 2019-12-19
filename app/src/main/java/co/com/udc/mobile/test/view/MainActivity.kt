@@ -19,8 +19,6 @@ import co.com.udc.mobile.test.adapters.UserAdapter
 import co.com.udc.mobile.test.data.User
 import co.com.udc.mobile.test.data.UserRepository
 import co.com.udc.mobile.test.viewmodels.UserViewModel
-import kotlinx.android.synthetic.main.activity_main.buttonAddUser
-import kotlinx.android.synthetic.main.activity_main.goButton
 import kotlinx.android.synthetic.main.activity_main.recycler_view
 import kotlinx.android.synthetic.main.activity_main.searchInput
 
@@ -41,12 +39,14 @@ class MainActivity : AppCompatActivity() {
 
         initComponents()
 
+        /*
         buttonAddUser.setOnClickListener {
             startActivityForResult(
                     Intent(this, AddEditUserActivity::class.java),
                     ADD_POST_REQUEST
             )
         }
+        */
 
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.setHasFixedSize(true)
@@ -94,26 +94,23 @@ class MainActivity : AppCompatActivity() {
 
         adapter.setOnItemClickListener(object : UserAdapter.OnItemClickListener {
             override fun onItemClick(user: User) {
-                var intent = Intent(baseContext, AddEditUserActivity::class.java)
-                intent.putExtra(AddEditUserActivity.EXTRA_ID, user.id)
-                intent.putExtra(AddEditUserActivity.EXTRA_NAME, user.name)
-                intent.putExtra(AddEditUserActivity.EXTRA_USERNAME, user.username)
-                intent.putExtra(AddEditUserActivity.EXTRA_EMAIL, user.email)
-                intent.putExtra(AddEditUserActivity.EXTRA_PHONE, user.phone)
-
-                startActivityForResult(intent, EDIT_POST_REQUEST)
+                /*
+                var intent = Intent(baseContext, PostActivity::class.java)
+                intent.putExtra(PostActivity.EXTRA_ID, user.id)
+                intent.putExtra(PostActivity.EXTRA_NAME, user.name)
+                intent.putExtra(PostActivity.EXTRA_EMAIL, user.email)
+                intent.putExtra(PostActivity.EXTRA_PHONE, user.phone)
+                startActivity(intent)
+                */
+                var intent = Intent(baseContext, PoActivity::class.java)
+                intent.putExtra(PoActivity.EXTRA_ID, user.id)
+                intent.putExtra(PoActivity.EXTRA_NAME, user.name)
+                intent.putExtra(PoActivity.EXTRA_EMAIL, user.email)
+                intent.putExtra(PoActivity.EXTRA_PHONE, user.phone)
+                startActivity(intent)
             }
         })
-
-        /*
-        goButton.setOnClickListener {
-            val result = searchInput.text.toString()
-            if (result.isNotEmpty())
-                userViewModel.filterByName(result)
-            else userViewModel.getAllUsers()
-        }*/
     }
-
 
     private fun initComponents() {
         userAdapter = UserAdapter()

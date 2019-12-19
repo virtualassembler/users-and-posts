@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="co.com.udc.mobile.test.view.MainActivity">
-            <intent-filter >
+        <activity android:name=".view.PoActivity"></activity>
+        <activity android:name=".view.MainActivity">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="co.com.udc.mobile.test.view.AddEditUserActivity"></activity>
-        <activity android:name="co.com.udc.mobile.test.view.PostActivity" />
+        <activity android:name=".view.AddEditUserActivity" />
     </application>
 
 </manifest>
