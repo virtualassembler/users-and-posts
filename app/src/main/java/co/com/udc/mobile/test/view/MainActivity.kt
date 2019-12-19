@@ -3,6 +3,8 @@ package co.com.udc.mobile.test.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_main.buttonAddUser
 import kotlinx.android.synthetic.main.activity_main.goButton
 import kotlinx.android.synthetic.main.activity_main.recycler_view
 import kotlinx.android.synthetic.main.activity_main.searchInput
+
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -62,6 +65,17 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it)
         })
 
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(cs: CharSequence, s: Int, b: Int, c: Int) {
+                val result = searchInput.text.toString()
+                if (result.isNotEmpty())
+                    userViewModel.filterByName(result)
+                else userViewModel.getAllUsers()
+            }
+            override fun afterTextChanged(editable: Editable) {}
+            override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
+        })
+
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT.or(ItemTouchHelper.RIGHT)) {
             override fun onMove(
                     recyclerView: RecyclerView,
@@ -91,13 +105,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        /*
         goButton.setOnClickListener {
             val result = searchInput.text.toString()
             if (result.isNotEmpty())
                 userViewModel.filterByName(result)
             else userViewModel.getAllUsers()
-        }
+        }*/
     }
+
 
     private fun initComponents() {
         userAdapter = UserAdapter()
