@@ -1,4 +1,4 @@
-package co.com.udc.mobile.test.api
+package co.com.udc.mobile.test.rest
 
 import co.com.udc.mobile.test.data.User
 import co.com.udc.mobile.test.utils.BASE_URL

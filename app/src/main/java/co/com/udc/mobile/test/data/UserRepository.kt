@@ -5,7 +5,7 @@ import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.LiveData
 import co.com.udc.mobile.test.R
-import co.com.udc.mobile.test.api.ApiService
+import co.com.udc.mobile.test.rest.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
