@@ -11,11 +11,25 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserRepository(application: Application,val context: Context) {
+class UserRepository(private val application: Application) {
 
+
+
+
+    private var userDao: UserDao
+
+    private var allUsers: LiveData<List<User>>
+
+    init {
+        val database: UserDatabase = UserDatabase.getInstance(
+                application.applicationContext
+        )!!
+        userDao = database.userDao()
+        allUsers = userDao.getAllUsers()
+    }
 
     private val apiService = ApiService.instance
-    private val movieDatabase: UserDao get() = UserDatabase.getInstance(context)!!.userDao()
+    private val movieDatabase: UserDao get() = UserDatabase.getInstance(application)!!.userDao()
 
     //To look in the endpoint for userList
     fun requestMovieReviewList(): List<User> {
@@ -23,12 +37,12 @@ class UserRepository(application: Application,val context: Context) {
             override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                 when (response.code()) {
                     200 -> insertUsersIntoDatabase(response)
-                    else -> Log.e(context.getString(R.string.error_tag), context.getString(R.string.error_response_code_different_to_200))
+                    else -> Log.e(application.applicationContext.getString(R.string.error_tag), application.applicationContext.getString(R.string.error_response_code_different_to_200))
                 }
             }
 
             override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                Log.e(context.getString(R.string.error_tag), t.printStackTrace().toString())
+                Log.e(application.applicationContext.getString(R.string.error_tag), t.printStackTrace().toString())
             }
         })
         return getUserList()
@@ -45,20 +59,7 @@ class UserRepository(application: Application,val context: Context) {
     }
 
     fun getUserList(): List<User> {
-        return UserDatabase.getInstance(context)!!.userDao().getUsers()
-    }
-
-
-    private var userDao: UserDao
-
-    private var allUsers: LiveData<List<User>>
-
-    init {
-        val database: UserDatabase = UserDatabase.getInstance(
-                application.applicationContext
-        )!!
-        userDao = database.userDao()
-        allUsers = userDao.getAllUsers()
+        return UserDatabase.getInstance(application.applicationContext)!!.userDao().getUsers()
     }
 
     fun insert(user: User) {

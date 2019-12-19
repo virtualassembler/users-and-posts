@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initComponents() {
         userAdapter = UserAdapter()
-        userRepository = UserRepository(application,applicationContext)
+        userRepository = UserRepository(application)
         userRepository.requestMovieReviewList()
     }
 
