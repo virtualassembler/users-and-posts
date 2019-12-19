@@ -102,11 +102,11 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra(PostActivity.EXTRA_PHONE, user.phone)
                 startActivity(intent)
                 */
-                var intent = Intent(baseContext, PoActivity::class.java)
-                intent.putExtra(PoActivity.EXTRA_ID, user.id)
-                intent.putExtra(PoActivity.EXTRA_NAME, user.name)
-                intent.putExtra(PoActivity.EXTRA_EMAIL, user.email)
-                intent.putExtra(PoActivity.EXTRA_PHONE, user.phone)
+                var intent = Intent(baseContext, PostActivity::class.java)
+                intent.putExtra(PostActivity.EXTRA_ID, user.id)
+                intent.putExtra(PostActivity.EXTRA_NAME, user.name)
+                intent.putExtra(PostActivity.EXTRA_EMAIL, user.email)
+                intent.putExtra(PostActivity.EXTRA_PHONE, user.phone)
                 startActivity(intent)
             }
         })
