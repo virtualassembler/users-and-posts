@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/searchInput"
+            android:id="@+id/editTextSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
@@ -25,14 +25,9 @@
             android:drawablePadding="8dp"
             android:hint="Search"
             android:textColor="@color/cardview_dark_background" />
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/goButton"
-            android:text="go"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recyclerViewSearchResults"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="12dp"
@@ -41,14 +36,5 @@
             tools:listitem="@layout/user_item"
             tools:itemCount="5"/>
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/buttonAddUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_gravity="bottom|right"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

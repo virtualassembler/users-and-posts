@@ -10,8 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import co.com.udc.mobile.test.R
 import co.com.udc.mobile.test.data.User
 import kotlinx.android.synthetic.main.user_item.view.text_view_username
-import kotlinx.android.synthetic.main.user_item.view.text_view_priority
-import kotlinx.android.synthetic.main.user_item.view.text_view_name
+import kotlinx.android.synthetic.main.user_list_item.view.email
+import kotlinx.android.synthetic.main.user_list_item.view.name
+import kotlinx.android.synthetic.main.user_list_item.view.phone
 
 
 class UserAdapter: ListAdapter<User, UserAdapter.UserHolder>(DIFF_CALLBACK) {
@@ -32,16 +33,16 @@ class UserAdapter: ListAdapter<User, UserAdapter.UserHolder>(DIFF_CALLBACK) {
     private var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
-        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
+        val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.user_list_item, parent, false)
         return UserHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val currentUser: User = getItem(position)
 
-        holder.textViewTitle.text = currentUser.name
-        holder.textViewPriority.text = currentUser.phone.toString()
-        holder.textViewDescription.text = currentUser.username
+        holder.name.text = currentUser.name
+        holder.phone.text = currentUser.phone.toString()
+        holder.email.text = currentUser.username
     }
 
     fun getUserAt(position: Int): User {
@@ -58,9 +59,9 @@ class UserAdapter: ListAdapter<User, UserAdapter.UserHolder>(DIFF_CALLBACK) {
             }
         }
 
-        var textViewTitle: TextView = itemView.text_view_name
-        var textViewPriority: TextView = itemView.text_view_priority
-        var textViewDescription: TextView = itemView.text_view_username
+        var name: TextView = itemView.name
+        var phone: TextView = itemView.phone
+        var email: TextView = itemView.email
     }
 
     interface OnItemClickListener {

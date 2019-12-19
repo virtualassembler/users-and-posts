@@ -1,6 +1,5 @@
 package co.com.udc.mobile.test.view
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -19,17 +18,11 @@ import co.com.udc.mobile.test.adapters.UserAdapter
 import co.com.udc.mobile.test.data.User
 import co.com.udc.mobile.test.data.UserRepository
 import co.com.udc.mobile.test.viewmodels.UserViewModel
-import kotlinx.android.synthetic.main.activity_main.recycler_view
-import kotlinx.android.synthetic.main.activity_main.searchInput
+import kotlinx.android.synthetic.main.activity_main.editTextSearch
+import kotlinx.android.synthetic.main.activity_main.recyclerViewSearchResults
 
 
 class MainActivity : AppCompatActivity() {
-    /*
-    companion object {
-        const val ADD_POST_REQUEST = 1
-        const val EDIT_POST_REQUEST = 2
-    }
-    */
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var userAdapter: UserAdapter
@@ -41,21 +34,12 @@ class MainActivity : AppCompatActivity() {
 
         initComponents()
 
-        /*
-        buttonAddUser.setOnClickListener {
-            startActivityForResult(
-                    Intent(this, AddEditUserActivity::class.java),
-                    ADD_POST_REQUEST
-            )
-        }
-        */
-
-        recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.setHasFixedSize(true)
+        recyclerViewSearchResults.layoutManager = LinearLayoutManager(this)
+        recyclerViewSearchResults.setHasFixedSize(true)
 
         var adapter = UserAdapter()
 
-        recycler_view.adapter = adapter
+        recyclerViewSearchResults.adapter = adapter
 
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
 
@@ -67,13 +51,14 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(it)
         })
 
-        searchInput.addTextChangedListener(object : TextWatcher {
+        editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(cs: CharSequence, s: Int, b: Int, c: Int) {
-                val result = searchInput.text.toString()
+                val result = editTextSearch.text.toString()
                 if (result.isNotEmpty())
                     userViewModel.filterByName(result)
                 else userViewModel.getAllUsers()
             }
+
             override fun afterTextChanged(editable: Editable) {}
             override fun beforeTextChanged(cs: CharSequence, i: Int, j: Int, k: Int) {}
         })
@@ -92,18 +77,10 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(baseContext, "User Deleted!", Toast.LENGTH_SHORT).show()
             }
         }
-        ).attachToRecyclerView(recycler_view)
+        ).attachToRecyclerView(recyclerViewSearchResults)
 
         adapter.setOnItemClickListener(object : UserAdapter.OnItemClickListener {
             override fun onItemClick(user: User) {
-                /*
-                var intent = Intent(baseContext, PostActivity::class.java)
-                intent.putExtra(PostActivity.EXTRA_ID, user.id)
-                intent.putExtra(PostActivity.EXTRA_NAME, user.name)
-                intent.putExtra(PostActivity.EXTRA_EMAIL, user.email)
-                intent.putExtra(PostActivity.EXTRA_PHONE, user.phone)
-                startActivity(intent)
-                */
                 var intent = Intent(baseContext, PostActivity::class.java)
                 intent.putExtra(PostActivity.EXTRA_ID, user.id)
                 intent.putExtra(PostActivity.EXTRA_NAME, user.name)
@@ -139,39 +116,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /*
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == ADD_POST_REQUEST && resultCode == Activity.RESULT_OK) {
-            val newUser = User(
-                    data!!.getStringExtra(AddEditUserActivity.EXTRA_NAME),
-                    data.getStringExtra(AddEditUserActivity.EXTRA_USERNAME),
-                    data.getStringExtra(AddEditUserActivity.EXTRA_EMAIL),
-                    data.getStringExtra(AddEditUserActivity.EXTRA_PHONE)
-            )
-            userViewModel.insert(newUser)
-
-            Toast.makeText(this, "User saved!", Toast.LENGTH_SHORT).show()
-        } else if (requestCode == EDIT_POST_REQUEST && resultCode == Activity.RESULT_OK) {
-            val id = data?.getIntExtra(AddEditUserActivity.EXTRA_ID, -1)
-
-            if (id == -1) {
-                Toast.makeText(this, "Could not update! Error!", Toast.LENGTH_SHORT).show()
-            }
-
-            val updateUser = User(
-                    data!!.getStringExtra(AddEditUserActivity.EXTRA_NAME),
-                    data.getStringExtra(AddEditUserActivity.EXTRA_USERNAME),
-                    data.getStringExtra(AddEditUserActivity.EXTRA_EMAIL),
-                    data.getStringExtra(AddEditUserActivity.EXTRA_PHONE)
-            )
-            updateUser.id = data.getIntExtra(AddEditUserActivity.EXTRA_ID, -1)
-            userViewModel.update(updateUser)
-
-        } else {
-            Toast.makeText(this, "User not saved!", Toast.LENGTH_SHORT).show()
-        }
-    }
-    */
 }

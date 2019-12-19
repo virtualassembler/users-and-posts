@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
             android:id="@+id/delete_all_users"
-            android:title="Delete All Users"
+            android:title="Clear local database"
             app:showAsAction="never"/>
 </menu>
