@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Prueba de Ingreso</string>
+    <string name="app_name">LiveData</string>
     <string name="edit_text_search">Buscar usuario</string>
     <string name="btn_view_posts">Ver publicaciones</string>
     <string name="btn_view_comments">Ver comentarios</string>
@@ -7,4 +7,6 @@
     <string name="generic_error">Ha ocurrido un error inesperado</string>
     <string name="accept">Aceptar</string>
     <string name="list_is_empty">List is empty</string>
+    <string name="error_tag">Error</string>
+    <string name="error_response_code_different_to_200">Response code different to 200</string>
 </resources>

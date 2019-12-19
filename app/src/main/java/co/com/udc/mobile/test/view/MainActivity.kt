@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import co.com.udc.mobile.test.R
 import co.com.udc.mobile.test.adapters.UserAdapter
 import co.com.udc.mobile.test.data.User
+import co.com.udc.mobile.test.repository.MovieRepository
 import co.com.udc.mobile.test.viewmodels.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.buttonAddUser
 import kotlinx.android.synthetic.main.activity_main.recycler_view
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initComponents()
 
         buttonAddUser.setOnClickListener {
             startActivityForResult(
@@ -75,12 +77,23 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra(AddEditUserActivity.EXTRA_NAME, user.name)
                 intent.putExtra(AddEditUserActivity.EXTRA_USERNAME, user.username)
                 intent.putExtra(AddEditUserActivity.EXTRA_EMAIL, user.email)
-                intent.putExtra(AddEditUserActivity.EXTRA_PRIORITY, user.priority)
+                intent.putExtra(AddEditUserActivity.EXTRA_PHONE, user.phone)
 
                 startActivityForResult(intent, EDIT_POST_REQUEST)
             }
         })
     }
+
+
+    private lateinit var userAdapter: UserAdapter
+    private lateinit var movieRepository: MovieRepository
+
+    private fun initComponents() {
+        userAdapter = UserAdapter()
+        movieRepository = MovieRepository(application)
+        movieRepository.requestMovieReviewList()
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -108,7 +121,7 @@ class MainActivity : AppCompatActivity() {
                     data!!.getStringExtra(AddEditUserActivity.EXTRA_NAME),
                     data.getStringExtra(AddEditUserActivity.EXTRA_USERNAME),
                     data.getStringExtra(AddEditUserActivity.EXTRA_EMAIL),
-                    data.getIntExtra(AddEditUserActivity.EXTRA_PRIORITY, 1)
+                    data.getStringExtra(AddEditUserActivity.EXTRA_PHONE)
             )
             userViewModel.insert(newUser)
 
@@ -124,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                     data!!.getStringExtra(AddEditUserActivity.EXTRA_NAME),
                     data.getStringExtra(AddEditUserActivity.EXTRA_USERNAME),
                     data.getStringExtra(AddEditUserActivity.EXTRA_EMAIL),
-                    data.getIntExtra(AddEditUserActivity.EXTRA_PRIORITY, 1)
+                    data.getStringExtra(AddEditUserActivity.EXTRA_PHONE)
             )
             updateUser.id = data.getIntExtra(AddEditUserActivity.EXTRA_ID, -1)
             userViewModel.update(updateUser)

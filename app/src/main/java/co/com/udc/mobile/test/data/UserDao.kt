@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 
-
 @Dao
 interface UserDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User)
 
     @Update
@@ -22,6 +22,9 @@ interface UserDao {
     @Query("DELETE FROM user_table")
     fun deleteAllUsers()
 
-    @Query("SELECT * FROM user_table ORDER BY priority DESC")
+    @Query("SELECT * FROM user_table ORDER BY phone DESC")
     fun getAllUsers(): LiveData<List<User>>
+
+    @Query("SELECT * FROM user_table ORDER BY phone DESC")
+    fun getUsers(): List<User>
 }

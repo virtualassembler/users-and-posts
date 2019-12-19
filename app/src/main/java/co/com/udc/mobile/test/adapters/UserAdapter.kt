@@ -24,7 +24,7 @@ class UserAdapter: ListAdapter<User, UserAdapter.UserHolder>(DIFF_CALLBACK) {
 
             override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem.name == newItem.name && oldItem.username == newItem.username
-                        && oldItem.priority == newItem.priority
+                        && oldItem.phone == newItem.phone
             }
         }
     }
@@ -40,7 +40,7 @@ class UserAdapter: ListAdapter<User, UserAdapter.UserHolder>(DIFF_CALLBACK) {
         val currentUser: User = getItem(position)
 
         holder.textViewTitle.text = currentUser.name
-        holder.textViewPriority.text = currentUser.priority.toString()
+        holder.textViewPriority.text = currentUser.phone.toString()
         holder.textViewDescription.text = currentUser.username
     }
 

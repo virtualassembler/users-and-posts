@@ -20,7 +20,7 @@ class AddEditUserActivity : AppCompatActivity() {
         const val EXTRA_NAME = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_NAME"
         const val EXTRA_USERNAME = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_USERNAME"
         const val EXTRA_EMAIL = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_EMAIL"
-        const val EXTRA_PRIORITY = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_PRIORITY"
+        const val EXTRA_PHONE = "co.com.ceiba.mobile.pruebadeingreso.view.EXTRA_PRIORITY"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class AddEditUserActivity : AppCompatActivity() {
             edit_text_name.setText(intent.getStringExtra(EXTRA_NAME))
             edit_text_username.setText(intent.getStringExtra(EXTRA_USERNAME))
             edit_text_email.setText(intent.getStringExtra(EXTRA_EMAIL))
-            number_picker_priority.value = intent.getIntExtra(EXTRA_PRIORITY, 1)
+            number_picker_priority.value = intent.getIntExtra(EXTRA_PHONE, 1)
         } else {
             title = "Add User"
         }
@@ -71,7 +71,7 @@ class AddEditUserActivity : AppCompatActivity() {
             putExtra(EXTRA_NAME, edit_text_name.text.toString())
             putExtra(EXTRA_USERNAME, edit_text_username.text.toString())
             putExtra(EXTRA_EMAIL, "emaildeprueba@gmail.com")
-            putExtra(EXTRA_PRIORITY, number_picker_priority.value)
+            putExtra(EXTRA_PHONE, number_picker_priority.value)
             if (intent.getIntExtra(EXTRA_ID, -1) != -1) {
                 putExtra(EXTRA_ID, intent.getIntExtra(EXTRA_ID, -1))
             }

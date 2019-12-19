@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 
-@Database(entities = [User::class], version = 2)
+@Database(entities = [User::class], version = 3)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
@@ -23,8 +23,9 @@ abstract class UserDatabase : RoomDatabase() {
                             context.applicationContext,
                             UserDatabase::class.java, "user_database"
                     )
-                            .fallbackToDestructiveMigration() // when version increments, it migrates (deletes db and creates new) - else it crashes
+                            .fallbackToDestructiveMigration()
                             .addCallback(roomCallback)
+                            .allowMainThreadQueries()
                             .build()
                 }
             }
@@ -48,9 +49,9 @@ abstract class UserDatabase : RoomDatabase() {
         private val userDao = db?.userDao()
 
         override fun doInBackground(vararg p0: Unit?) {
-            userDao?.insert(User("David", "DavidLab44","david@gmail.com", 1))
-            userDao?.insert(User("Camilo", "Milo","camilo@gmail.com", 2))
-            userDao?.insert(User("Jaiber", "JJYepes","jaiber@gmail.com", 3))
+            userDao?.insert(User("David", "DavidLab44","david@gmail.com", "3016493756"))
+            userDao?.insert(User("Camilo", "Milo","camilo@gmail.com", "3106472883"))
+            userDao?.insert(User("Jaiber", "JJYepes","juanjaiber@gmail.com", "31066437857"))
         }
     }
 
