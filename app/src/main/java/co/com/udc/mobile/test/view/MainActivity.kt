@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         userAdapter = UserAdapter()
         userRepository = UserRepository(application)
         userRepository.requestMovieReviewList()
-        //esto muere aqui
+        //init
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
