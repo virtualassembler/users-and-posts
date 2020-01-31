@@ -1,11 +1,11 @@
-package co.com.udc.mobile.test.data
+package co.com.ceiba.mobile.pruebadeingreso.data
 
 import android.app.Application
 import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.LiveData
-import co.com.udc.mobile.test.R
-import co.com.udc.mobile.test.rest.ApiService
+import co.com.ceiba.mobile.pruebadeingreso.R
+import co.com.ceiba.mobile.pruebadeingreso.rest.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

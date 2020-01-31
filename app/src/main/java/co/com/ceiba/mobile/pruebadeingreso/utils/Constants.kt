@@ -1,4 +1,4 @@
-package co.com.udc.mobile.test.utils
+package co.com.ceiba.mobile.pruebadeingreso.utils
 /**
  * Constants
  *

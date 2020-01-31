@@ -1,4 +1,4 @@
-package co.com.udc.mobile.test.data
+package co.com.ceiba.mobile.pruebadeingreso.data
 
 import androidx.room.Entity
 import com.google.gson.annotations.SerializedName

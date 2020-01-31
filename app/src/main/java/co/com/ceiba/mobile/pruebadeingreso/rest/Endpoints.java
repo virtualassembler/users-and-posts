@@ -1,4 +1,4 @@
-package co.com.udc.mobile.test.rest;
+package co.com.ceiba.mobile.pruebadeingreso.rest;
 
 public class Endpoints {
     public static final String URL_BASE = "https://jsonplaceholder.typicode.com";

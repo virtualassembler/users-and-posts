@@ -1,7 +1,7 @@
-package co.com.udc.mobile.test.rest
+package co.com.ceiba.mobile.pruebadeingreso.rest
 
-import co.com.udc.mobile.test.data.User
-import co.com.udc.mobile.test.utils.BASE_URL
+import co.com.ceiba.mobile.pruebadeingreso.data.User
+import co.com.ceiba.mobile.pruebadeingreso.utils.BASE_URL
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

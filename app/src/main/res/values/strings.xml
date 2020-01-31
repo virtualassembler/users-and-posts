@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LiveData</string>
+    <string name="app_name">UsersAndPosts</string>
     <string name="edit_text_search">Buscar usuario</string>
     <string name="btn_view_posts">Ver publicaciones</string>
     <string name="btn_view_comments">Ver comentarios</string>
